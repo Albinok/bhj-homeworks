@@ -16,6 +16,12 @@ let clickHole = array.forEach((item) => {
     } else {
       counterLost++;
     }
+
+    if (counterLost > 5) {
+      alert('Вы проиграли');
+      counterDead = 0;
+      counterLost = 0;
+    }
     dead.textContent = counterDead;
     lost.textContent = counterLost;
   }
