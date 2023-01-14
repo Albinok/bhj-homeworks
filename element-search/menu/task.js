@@ -7,12 +7,15 @@ menuLink.forEach(element => {
 
     if (elemMenu) {
       if (openElemMenu !== undefined && openElemMenu !== elemMenu) {
-        openElemMenu.className = "menu menu_sub";
+        openElemMenu.className = 'menu menu_sub';
       }
 
-      elemMenu.className += ' menu_active';
-      openElemMenu = elemMenu;
-
+      if (elemMenu.className === 'menu menu_sub menu_active') {
+        elemMenu.className = 'menu menu_sub';
+      } else {
+        elemMenu.className += ' menu_active';
+        openElemMenu = elemMenu;
+      }  
       return false;
     }
   }    
