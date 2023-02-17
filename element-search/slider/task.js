@@ -1,35 +1,30 @@
 const sliderItem = Array.from(document.getElementsByClassName('slider__item'));
 const sliderPrev = document.querySelector(".slider__arrow_prev");
 const sliderNext = document.querySelector(".slider__arrow_next");
-let newIndex;
 
-let activeSlideIndex = sliderItem.findIndex((elem) => {
-  if (elem.className === "slider__item slider__item_active") {
-    return true;
-  }
+const dots = Array.from(document.getElementsByClassName('slider__dot'));
+
+function changeSlider(index) {
+  const indexActiveSlider = sliderItem.findIndex(slider => slider.classList.contains('slider__item_active'));
+  sliderItem[indexActiveSlider].classList.remove('slider__item_active');
+  dots[indexActiveSlider].classList.remove('slider__dot_active');
+
+  sliderItem[index].classList.add('slider__item_active');
+  dots[index].classList.add('slider__dot_active');
+}
+
+document.addEventListener('wheel', (event) => {
+  const indexActiveSlider = sliderItem.findIndex(slider => slider.classList.contains('slider__item_active'));
+  event.deltaY < 0 ? changeSlider(indexActiveSlider === sliderItem.length - 1 ? 0 : indexActiveSlider + 1) : changeSlider(indexActiveSlider === 0 ? sliderItem.length - 1 : indexActiveSlider - 1);
 });
 
-const slider = (index) => {
-  sliderItem[activeSlideIndex].className = 'slider__item';
+sliderPrev.addEventListener('click', () => {
+  const indexActiveSlider = sliderItem.findIndex(slider => slider.classList.contains('slider__item_active'));
+  changeSlider(indexActiveSlider === 0 ? sliderItem.length - 1 : indexActiveSlider - 1);
+});
 
-  if (index > sliderItem.length - 1) {
-    newIndex = 0;
-  } else if (index < 0) {
-    newIndex = sliderItem.length - 1;
-  } else {
-    newIndex = index;
-  }
-
-  sliderItem[newIndex].className = 'slider__item slider__item_active';
-  activeSlideIndex = newIndex;
-};
-
-sliderNext.onclick = () => {
-  slider(activeSlideIndex + 1);
-};
-
-sliderPrev.onclick = () => {
-  slider(activeSlideIndex - 1);
-};
-
+sliderNext.addEventListener('click', () => {
+  const indexActiveSlider = sliderItem.findIndex(slider => slider.classList.contains('slider__item_active'));
+  changeSlider(indexActiveSlider === sliderItem.length - 1 ? 0 : indexActiveSlider + 1);
+});
 
