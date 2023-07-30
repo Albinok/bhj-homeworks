@@ -3,9 +3,8 @@ const taskAdd = document.querySelector('.tasks__add');
 const taskList = document.querySelector('.tasks__list');
 
 taskAdd.addEventListener('click', (e) => {
-  console.log(taskInput)
-  taskInput.value = taskInput.value.trim()
-  if (taskInput.value) {
+  e.preventDefault();
+  if (taskInput.value.trim()) {
 
     taskList.insertAdjacentHTML('afterEnd', `<div class="task">
     <div class="task__title"> ${taskInput.value} </div>
