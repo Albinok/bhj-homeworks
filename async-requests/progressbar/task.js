@@ -11,6 +11,6 @@ form.addEventListener('submit', (event) => {
         progress.value = event.loaded / event.total;
     });
     
-    xhr.open('POST', 'https://netology-slow-rest.herokuapp.com/upload.php');
+    xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/upload');
     xhr.send(formData);
 })
